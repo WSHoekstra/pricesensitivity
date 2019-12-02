@@ -1,8 +1,8 @@
-library('haven')
-library('dplyr')
-library('ggplot2')
-library('scales')
-library('plotly')
+#' @import haven
+#' @import dplyr
+#' @import ggplot2
+#' @import scales
+#' @import plotly
 
 
 determine_n_values_under_cutoff <- function(cutoffs, values){
@@ -158,29 +158,29 @@ visualize_pricing_stats <- function(pricing_stats,
     title <- paste0(title, '\n', 'based on data from ', n, ' respondents')
   }
 
-  p <- ggplot(data = pricing_stats %>% filter(price <= ylim_max), aes(x = price))+
-    theme_bw() +
-    geom_line(aes(y = too_cheap, color = "too_cheap"), size=line_size) +
-    geom_line(aes(y = too_expensive, color = "too_expensive"), size=line_size) +
-    geom_line(aes(y = bargain, color = "bargain"), size=line_size) +
-    geom_line(aes(y = getting_expensive, color = "getting_expensive"), size=line_size) +
-    geom_vline(xintercept = lower_bound, linetype = "dotted", size=1) +
-    geom_vline(xintercept = upper_bound, linetype = "dotted", size=1) +
-    scale_y_continuous(labels = scales::percent) +
-    theme(axis.title.x = element_text('Price'),
-          axis.title.y = element_blank()) +
-    scale_colour_manual(name = "Legend",
+  p <- ggplot2::ggplot(data = pricing_stats %>% dplyr::filter(price <= ylim_max), ggplot2::aes(x = price))+
+    ggplot2::theme_bw() +
+    ggplot2::geom_line(aes(y = too_cheap, color = "too_cheap"), size=line_size) +
+    ggplot2::geom_line(aes(y = too_expensive, color = "too_expensive"), size=line_size) +
+    ggplot2::geom_line(aes(y = bargain, color = "bargain"), size=line_size) +
+    ggplot2::geom_line(aes(y = getting_expensive, color = "getting_expensive"), size=line_size) +
+    ggplot2::geom_vline(xintercept = lower_bound, linetype = "dotted", size=1) +
+    ggplot2::geom_vline(xintercept = upper_bound, linetype = "dotted", size=1) +
+    ggplot2::scale_y_continuous(labels = scales::percent) +
+    ggplot2::theme(axis.title.x = ggplot2::element_text('Price'),
+          axis.title.y = ggplot2::element_blank()) +
+    ggplot2::scale_colour_manual(name = "Legend",
                         values=c(too_cheap = too_cheap_color,
                                  too_expensive = too_expensive_color,
                                  bargain = bargain_color,
                                  getting_expensive = getting_expensive_color))
 
   if (!is.null(title)) {
-    p <- p + ggtitle(title)
+    p <- p + ggplot2::ggtitle(title)
 
     if (title_orientation == 'center')
       {
-      p <- p + theme(plot.title = element_text(hjust = 0.5))
+      p <- p + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
       }
   }
   return(p)

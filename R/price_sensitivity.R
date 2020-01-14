@@ -27,7 +27,7 @@ determine_n_values_over_cutoff <- function(cutoffs, values){
   return(results)
 }
 
-
+#' @export
 generate_pricing_stats <- function(surveydata,
               too_expensive,
               bargain,
@@ -107,7 +107,7 @@ generate_pricing_stats <- function(surveydata,
 
 
 
-
+#' @export
 find_price_optimimum_range <- function(pricing_stats){
   #` Find the optima cutoffs in the pricing stats
   lower_bound <- min(pricing_stats$price[pricing_stats$lower_bound_met == TRUE])
@@ -115,6 +115,7 @@ find_price_optimimum_range <- function(pricing_stats){
   return( c(lower_bound, upper_bound))
 }
 
+#' @export
 visualize_pricing_stats <- function(pricing_stats,
                         pricing_stats_metadata,
                         title,
